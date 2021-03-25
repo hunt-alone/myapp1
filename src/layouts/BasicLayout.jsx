@@ -12,6 +12,7 @@ import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import { getMatchMenu } from '@umijs/route-utils';
 import logo from '../assets/logo.svg';
+import KeepAliveTabs from '@/components/KeepAliveTabs';
 
 const noMatch = (
   <Result
@@ -100,11 +101,7 @@ const BasicLayout = (props) => {
   );
   const { formatMessage } = useIntl();
 
-  const [settings, setSettings] = useState({
-    fixSiderbar: true,
-    fixedHeader: true,
-    navTheme: 'light',
-  });
+  const [settings, setSettings] = useState({});
   return (
     <ProLayout
       logo={logo}
@@ -149,6 +146,7 @@ const BasicLayout = (props) => {
         return null;
       }}
       menuDataRender={menuDataRender}
+      headerContentRender={() => <KeepAliveTabs />}
       rightContentRender={() => <RightContent />}
       postMenuData={(menuData) => {
         menuDataRef.current = menuData || [];

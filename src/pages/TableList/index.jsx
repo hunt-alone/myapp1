@@ -1,6 +1,6 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, message, Input, Drawer } from 'antd';
-import React, { useState, useRef } from 'react';
+import { Button, message, Input, Drawer, notification } from 'antd';
+import React, { useState, useRef, useEffect } from 'react';
 import { useIntl, FormattedMessage } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import ProTable from '@ant-design/pro-table';
@@ -8,6 +8,7 @@ import { ModalForm, ProFormText, ProFormTextArea } from '@ant-design/pro-form';
 import ProDescriptions from '@ant-design/pro-descriptions';
 import UpdateForm from './components/UpdateForm';
 import { queryRule, updateRule, addRule, removeRule } from './service';
+import { KeepAlive, useActivate, useUnactivate } from 'react-activation';
 /**
  * 添加节点
  *
@@ -89,6 +90,28 @@ const TableList = () => {
   /** 国际化配置 */
 
   const intl = useIntl();
+  useEffect(() => {
+    notification.info({
+      message: '[Chart] mounted',
+    });
+
+    return () => {
+      notification.error({
+        message: '[Chart] unmounted',
+      });
+    };
+  }, []);
+
+  useActivate(() => {
+    notification.success({
+      message: '[Chart] activated',
+    });
+  });
+  useUnactivate(() => {
+    notification.warning({
+      message: '[Chart] unactivated',
+    });
+  });
   const columns = [
     {
       title: (
@@ -363,4 +386,8 @@ const TableList = () => {
   );
 };
 
-export default TableList;
+export default () => (
+  <KeepAlive name="/list" saveScrollPosition="screen">
+    <TableList />
+  </KeepAlive>
+);
