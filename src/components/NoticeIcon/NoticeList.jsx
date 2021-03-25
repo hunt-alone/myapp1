@@ -36,7 +36,7 @@ const NoticeList = ({
           const itemCls = classNames(styles.item, {
             [styles.read]: item.read,
           }); // eslint-disable-next-line no-nested-ternary
-
+          // 这里是注释
           let leftIcon = null;
           if (item.avatar) {
             if (typeof item.avatar === 'string') {
