@@ -83,7 +83,6 @@
     "@umijs/yorkie": "^2.0.3",
     "carlo": "^0.9.46",
     "chalk": "^4.0.0",
-    "commitizen": "^4.2.3",
     "commitlint": "^12.0.1",
     "cross-env": "^7.0.0",
     "cross-port-killer": "^1.1.1",
